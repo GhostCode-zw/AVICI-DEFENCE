@@ -1,0 +1,377 @@
+/* ============================================================
+   SecuritySolutions.css
+   Dark section · stacked image collage · icon feature list
+   ============================================================ */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --accent:    #f5c518;
+  --accent-h:  #ffd84d;
+  --ss-bg:     #111111;
+  --ss-card:   #1a1a1a;
+  --ss-border: rgba(255, 255, 255, 0.07);
+  --ss-font:   'Barlow', 'Sora', sans-serif;
+  --white:     #ffffff;
+  --muted:     rgba(255, 255, 255, 0.50);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   1.  SECTION SHELL
+═══════════════════════════════════════════════════════════ */
+.ss {
+  width:       100%;
+  background:  var(--ss-bg);
+  font-family: var(--ss-font);
+  padding:     80px 0;
+}
+
+.ss__container {
+  max-width: 1240px;
+  margin:    0 auto;
+  padding:   0 60px;
+  display:   flex;
+  flex-direction: column;
+  gap:       56px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2.  HEADER ROW — headline + subtitle top-left
+═══════════════════════════════════════════════════════════ */
+.ss__header {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       20px;
+}
+
+.ss__header-left {
+  display:        flex;
+  flex-direction: column;
+  gap:            16px;
+  max-width:      600px;
+}
+
+.ss__title {
+  font-size:      clamp(1.8rem, 3vw, 2.6rem);
+  font-weight:    800;
+  color:          var(--white);
+  line-height:    1.15;
+  letter-spacing: -0.01em;
+  margin:         0;
+}
+
+.ss__subtitle {
+  font-size:   0.87rem;
+  font-weight: 400;
+  line-height: 1.78;
+  color:       var(--muted);
+  margin:      0;
+  max-width:   520px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3.  BODY ROW — image collage LEFT, feature list RIGHT
+═══════════════════════════════════════════════════════════ */
+.ss__body {
+  display:     flex;
+  gap:         60px;
+  align-items: flex-start;
+}
+
+/* ── LEFT: Image stack ──────────────────────────────────── */
+.ss__images {
+  flex:      0 0 45%;      /* fixed width, won't grow */
+  max-width: 45%;
+}
+
+/* The stack is position:relative so cards can overlap absolutely */
+.ss__img-stack {
+  position:    relative;
+  width:       100%;
+  height:      420px;      /* tall enough to show all 3 cards */
+}
+
+/* ── Shared card style ── */
+.ss__img-card {
+  position:      absolute;
+  border-radius: 8px;
+  overflow:      hidden;
+  box-shadow:    0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+.ss__img-card img {
+  width:       100%;
+  height:      100%;
+  object-fit:  cover;
+  display:     block;
+}
+
+/* Back card — leftmost, slightly behind */
+.ss__img-card--back {
+  width:   52%;
+  height:  300px;
+  top:     0;
+  left:    0;
+  z-index: 1;
+}
+
+/* Caption on back card */
+.ss__img-caption {
+  position:    absolute;
+  bottom:      0;
+  left:        0;
+  right:       0;
+  padding:     12px 14px;
+  background:  linear-gradient(transparent, rgba(0,0,0,0.75));
+  font-size:   0.72rem;
+  font-weight: 600;
+  color:       var(--white);
+  margin:      0;
+}
+
+/* Middle card — centre-right, largest, on top */
+.ss__img-card--mid {
+  width:   58%;
+  height:  320px;
+  top:     40px;
+  left:    38%;
+  z-index: 3;
+}
+
+/* Front card — bottom-left, peeks out from behind */
+.ss__img-card--front {
+  width:   48%;
+  height:  200px;
+  bottom:  0;
+  left:    4%;
+  z-index: 2;
+}
+
+/* ── Yellow circular play button ── */
+.ss__play {
+  position:        absolute;
+  top:             50%;
+  left:            50%;
+  transform:       translate(-50%, -50%);
+  width:           52px;
+  height:          52px;
+  border-radius:   50%;
+  background:      var(--accent);
+  border:          none;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  color:           #0d0d0d;
+  box-shadow:      0 0 0 0 rgba(245, 197, 24, 0.45);
+  transition:      background 0.2s, transform 0.2s;
+  animation:       playPulse 2.2s ease-in-out infinite;
+}
+
+.ss__play svg {
+  width:      22px;
+  height:     22px;
+  margin-left: 3px; /* optical centre for triangle */
+}
+
+.ss__play:hover {
+  background:  var(--accent-h);
+  transform:   translate(-50%, -50%) scale(1.1);
+  animation:   none;
+}
+
+.ss__play--active {
+  background: #fff;
+}
+
+@keyframes playPulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(245,197,24,0.45); }
+  50%       { box-shadow: 0 0 0 14px rgba(245,197,24,0);  }
+}
+
+/* ── RIGHT: Feature list ───────────────────────────────── */
+.ss__features {
+  flex:           1;
+  display:        flex;
+  flex-direction: column;
+  gap:            36px;
+  padding-top:    8px;
+}
+
+/* Single feature row */
+.ss__feature {
+  display:     flex;
+  gap:         20px;
+  align-items: flex-start;
+}
+
+/* Icon box */
+.ss__feature-icon {
+  flex-shrink: 0;
+  width:       56px;
+  height:      56px;
+  border:      1.5px solid rgba(245, 197, 24, 0.3);
+  border-radius: 8px;
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  padding:     10px;
+  background:  rgba(245, 197, 24, 0.04);
+  transition:  border-color 0.2s, background 0.2s;
+}
+
+.ss__feature-icon svg {
+  width:  100%;
+  height: 100%;
+}
+
+.ss__feature:hover .ss__feature-icon {
+  border-color: var(--accent);
+  background:   rgba(245, 197, 24, 0.10);
+}
+
+/* Text block */
+.ss__feature-copy {
+  display:        flex;
+  flex-direction: column;
+  gap:            8px;
+}
+
+.ss__feature-title {
+  font-size:   1rem;
+  font-weight: 700;
+  color:       var(--white);
+  margin:      0;
+  line-height: 1.2;
+}
+
+.ss__feature-body {
+  font-size:   0.84rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color:       var(--muted);
+  margin:      0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4.  FOOTER ROW — body text left + buttons right
+═══════════════════════════════════════════════════════════ */
+.ss__footer {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             40px;
+  padding-top:     32px;
+  border-top:      1px solid var(--ss-border);
+  flex-wrap:       wrap;
+}
+
+.ss__footer-text {
+  font-size:   0.85rem;
+  line-height: 1.75;
+  color:       var(--muted);
+  max-width:   560px;
+  margin:      0;
+}
+
+.ss__footer-btns {
+  display:    flex;
+  gap:        14px;
+  flex-shrink: 0;
+  flex-wrap:  wrap;
+}
+
+/* Shared button base */
+.ss-btn {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             8px;
+  padding:         11px 22px;
+  font-family:     var(--ss-font);
+  font-size:       0.82rem;
+  font-weight:     600;
+  letter-spacing:  0.03em;
+  text-decoration: none;
+  border-radius:   3px;
+  white-space:     nowrap;
+  transition:      background 0.2s, border-color 0.2s,
+                   color 0.2s, transform 0.2s;
+}
+
+.ss-btn__arrow {
+  width:  15px;
+  height: 15px;
+}
+
+/* Outlined — dark bg with white border */
+.ss-btn--outline {
+  background:   transparent;
+  color:        var(--white);
+  border:       1.5px solid rgba(255,255,255,0.35);
+}
+.ss-btn--outline:hover {
+  border-color: var(--white);
+  background:   rgba(255,255,255,0.06);
+  transform:    translateY(-2px);
+}
+
+/* Yellow solid */
+.ss-btn--yellow {
+  background:   var(--accent);
+  color:        #0d0d0d;
+  border:       1.5px solid var(--accent);
+  font-weight:  700;
+}
+.ss-btn--yellow:hover {
+  background:   var(--accent-h);
+  border-color: var(--accent-h);
+  transform:    translateY(-2px);
+  box-shadow:   0 6px 20px rgba(245,197,24,0.30);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5.  RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 960px) {
+  .ss__container { padding: 0 40px; gap: 44px; }
+
+  .ss__body {
+    flex-direction: column;
+    gap:            48px;
+  }
+
+  .ss__images {
+    flex:      none;
+    max-width: 100%;
+    width:     100%;
+  }
+
+  .ss__img-stack { height: 340px; }
+
+  .ss__footer {
+    flex-direction: column;
+    align-items:    flex-start;
+    gap:            24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .ss          { padding: 56px 0; }
+  .ss__container { padding: 0 24px; gap: 36px; }
+
+  .ss__img-stack   { height: 260px; }
+  .ss__img-card--back  { width: 55%; height: 220px; }
+  .ss__img-card--mid   { width: 60%; height: 240px; top: 30px; left: 35%; }
+  .ss__img-card--front { width: 50%; height: 160px; }
+
+  .ss__feature-icon { width: 46px; height: 46px; }
+
+  .ss__footer-btns {
+    width:    100%;
+    flex-direction: column;
+  }
+
+  .ss-btn { justify-content: center; }
+}

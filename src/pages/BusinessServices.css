@@ -1,0 +1,264 @@
+/* ============================================================
+   BusinessServices.css
+   Dark section · 3-column card grid · yellow icon accents
+   ============================================================ */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --accent:      #f5c518;
+  --accent-h:    #ffd84d;
+  --bs-bg:       #0e0e0e;
+  --bs-card-bg:  #1a1a1a;
+  --bs-border:   rgba(255, 255, 255, 0.07);
+  --bs-font:     'Barlow', 'Sora', sans-serif;
+  --white:       #ffffff;
+  --muted:       rgba(255, 255, 255, 0.52);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   1.  SECTION
+═══════════════════════════════════════════════════════════ */
+.bs {
+  width:       100%;
+  background:  var(--bs-bg);
+  font-family: var(--bs-font);
+  padding:     90px 0;
+}
+
+.bs__container {
+  max-width:      1240px;
+  margin:         0 auto;
+  padding:        0 60px;
+  display:        flex;
+  flex-direction: column;
+  gap:            52px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2.  HEADER — centred
+═══════════════════════════════════════════════════════════ */
+.bs__header {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  text-align:     center;
+  gap:            12px;
+}
+
+/* Small label above title */
+.bs__eyebrow {
+  font-size:      0.75rem;
+  font-weight:    600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--accent);
+  margin:         0;
+}
+
+.bs__title {
+  font-size:      clamp(1.7rem, 3vw, 2.4rem);
+  font-weight:    800;
+  color:          var(--white);
+  line-height:    1.2;
+  letter-spacing: -0.01em;
+  margin:         0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3.  CARD GRID — 3 equal columns
+═══════════════════════════════════════════════════════════ */
+.bs__grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap:                   24px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4.  SINGLE CARD
+═══════════════════════════════════════════════════════════ */
+.bs__card {
+  background:     var(--bs-card-bg);
+  border:         1px solid var(--bs-border);
+  border-radius:  8px;
+  overflow:       hidden;             /* clips image corners    */
+  display:        flex;
+  flex-direction: column;
+  transition:     border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.bs__card:hover {
+  border-color: rgba(245, 197, 24, 0.35);
+  transform:    translateY(-4px);
+  box-shadow:   0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* ── Top text area ── */
+.bs__card-top {
+  padding: 28px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;                            /* pushes image to bottom */
+}
+
+/* Icon wrapper */
+.bs__card-icon {
+  width:            52px;
+  height:           52px;
+  border:           1.5px solid rgba(245, 197, 24, 0.25);
+  border-radius:    8px;
+  background:       rgba(245, 197, 24, 0.05);
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  padding:          10px;
+  transition:       border-color 0.25s, background 0.25s;
+}
+
+.bs__card-icon svg {
+  width:  100%;
+  height: 100%;
+}
+
+.bs__card:hover .bs__card-icon {
+  border-color: var(--accent);
+  background:   rgba(245, 197, 24, 0.12);
+}
+
+.bs__card-title {
+  font-size:   1rem;
+  font-weight: 700;
+  color:       var(--white);
+  line-height: 1.25;
+  margin:      0;
+}
+
+.bs__card-body {
+  font-size:   0.83rem;
+  font-weight: 400;
+  line-height: 1.72;
+  color:       var(--muted);
+  margin:      0;
+}
+
+/* ── Image area — fixed height, play button over it ── */
+.bs__card-img-wrap {
+  position:   relative;
+  width:       100%;
+  height:      190px;
+  flex-shrink: 0;
+  overflow:    hidden;
+}
+
+.bs__card-img {
+  width:       100%;
+  height:      100%;
+  object-fit:  cover;
+  display:     block;
+  transition:  transform 0.4s ease;
+}
+
+.bs__card:hover .bs__card-img {
+  transform: scale(1.04);            /* subtle zoom on hover   */
+}
+
+/* ── Yellow circular play button ── */
+.bs__play {
+  position:        absolute;
+  bottom:          16px;
+  right:           16px;
+  width:           44px;
+  height:          44px;
+  border-radius:   50%;
+  background:      var(--accent);
+  border:          none;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  color:           #0d0d0d;
+  box-shadow:      0 0 0 0 rgba(245, 197, 24, 0.45);
+  transition:      background 0.2s, transform 0.2s;
+  animation:       bsPulse 2.4s ease-in-out infinite;
+}
+
+.bs__play svg {
+  width:       18px;
+  height:      18px;
+  margin-left: 2px; /* optical centre for triangle icon */
+}
+
+.bs__play:hover {
+  background: var(--accent-h);
+  transform:  scale(1.12);
+  animation:  none;
+}
+
+.bs__play--active {
+  background: #ffffff;
+  animation:  none;
+}
+
+@keyframes bsPulse {
+  0%,  100% { box-shadow: 0 0 0 0   rgba(245, 197, 24, 0.45); }
+  50%        { box-shadow: 0 0 0 12px rgba(245, 197, 24, 0);  }
+}
+
+/* ── Card footer: "Details →" link ── */
+.bs__card-footer {
+  padding:     14px 24px 18px;
+  border-top:  1px solid var(--bs-border);
+}
+
+.bs__details-link {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             6px;
+  font-size:       0.80rem;
+  font-weight:     600;
+  color:           var(--accent);
+  text-decoration: none;
+  letter-spacing:  0.03em;
+  transition:      gap 0.2s, color 0.2s;
+}
+
+.bs__details-arrow {
+  width:      14px;
+  height:     14px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.bs__details-link:hover {
+  color: var(--accent-h);
+  gap:   10px;                        /* arrow nudges right     */
+}
+
+.bs__details-link:hover .bs__details-arrow {
+  transform: translateX(3px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5.  RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+
+/* Tablet — 2 columns */
+@media (max-width: 960px) {
+  .bs__container { padding: 0 40px; gap: 40px; }
+
+  .bs__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile — 1 column */
+@media (max-width: 600px) {
+  .bs          { padding: 60px 0; }
+  .bs__container { padding: 0 24px; gap: 32px; }
+
+  .bs__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bs__card-img-wrap { height: 220px; } /* taller on single col */
+}

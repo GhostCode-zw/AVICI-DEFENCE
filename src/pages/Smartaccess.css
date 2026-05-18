@@ -1,0 +1,288 @@
+/* ============================================================
+   SmartAccess.css
+   White section · image bleeds left edge · checklist right
+   Mirror of HomeFeature but: image LEFT, text RIGHT
+   ============================================================ */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --accent:      #f5c518;
+  --accent-h:    #ffd84d;
+  --sa-font:     'Barlow', 'Sora', sans-serif;
+  --text-dark:   #111111;
+  --text-body:   #555555;
+  --text-muted:  #888888;
+  --tick-bg:     rgba(245, 197, 24, 0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   1.  SECTION — full-width flex row
+       Image column bleeds to the LEFT viewport edge
+═══════════════════════════════════════════════════════════ */
+.sa {
+  display:     flex;
+  align-items: stretch;
+  width:       100%;
+  min-height:  560px;
+  background:  #ffffff;
+  font-family: var(--sa-font);
+  overflow:    hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2.  LEFT COLUMN — image fills, bleeds to edge
+       (same technique as HomeFeature right column, mirrored)
+═══════════════════════════════════════════════════════════ */
+.sa__image-col {
+  flex:       0 0 48%;     /* fixed 48% — never grows */
+  max-width:  48%;
+  position:   relative;
+  overflow:   hidden;
+  min-height: 500px;
+}
+
+.sa__image {
+  position:        absolute;
+  inset:           0;          /* top:0 right:0 bottom:0 left:0 */
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+
+/* ── Stat card — yellow, overlaps bottom-right of image ── */
+.sa__stat-card {
+  position:    absolute;
+  bottom:      32px;
+  right:       -1px;           /* flush with the column's right edge */
+  display:     flex;
+  align-items: center;
+  gap:         14px;
+  background:  var(--accent);
+  padding:     18px 24px;
+  border-radius: 6px 0 0 6px; /* rounded left, flat right (at edge)  */
+  box-shadow:  0 8px 28px rgba(245, 197, 24, 0.35);
+  min-width:   220px;
+}
+
+.sa__stat-number {
+  font-size:      2rem;
+  font-weight:    900;
+  color:          #0d0d0d;
+  line-height:    1;
+  flex-shrink:    0;
+  letter-spacing: -0.02em;
+}
+
+.sa__stat-copy {
+  display:        flex;
+  flex-direction: column;
+  gap:            2px;
+}
+
+.sa__stat-label {
+  font-size:   0.80rem;
+  font-weight: 700;
+  color:       #0d0d0d;
+  margin:      0;
+  line-height: 1.3;
+}
+
+.sa__stat-sub {
+  font-size:   0.68rem;
+  font-weight: 500;
+  color:       rgba(0, 0, 0, 0.60);
+  margin:      0;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3.  RIGHT COLUMN — text, checklist, CTA
+═══════════════════════════════════════════════════════════ */
+.sa__text {
+  flex:            1;          /* takes all remaining space */
+  padding:         80px 80px 80px 64px;
+  display:         flex;
+  flex-direction:  column;
+  justify-content: center;
+  gap:             20px;
+}
+
+/* Eyebrow */
+.sa__eyebrow {
+  font-size:      0.72rem;
+  font-weight:    700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--accent);
+  margin:         0;
+}
+
+/* Headline */
+.sa__headline {
+  font-size:      clamp(1.7rem, 2.8vw, 2.4rem);
+  font-weight:    800;
+  color:          var(--text-dark);
+  line-height:    1.18;
+  letter-spacing: -0.01em;
+  margin:         0;
+}
+
+/* Body text */
+.sa__body {
+  font-size:   0.88rem;
+  font-weight: 400;
+  line-height: 1.80;
+  color:       var(--text-body);
+  max-width:   480px;
+  margin:      0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4.  CHECKLIST
+═══════════════════════════════════════════════════════════ */
+.sa__list {
+  list-style: none;
+  margin:     4px 0 0;
+  padding:    0;
+  display:    flex;
+  flex-direction: column;
+  gap:        10px;
+}
+
+.sa__list-item {
+  display:     flex;
+  align-items: center;
+  gap:         12px;
+  font-size:   0.87rem;
+  font-weight: 500;
+  color:       var(--text-dark);
+  line-height: 1.4;
+}
+
+/* Yellow tick circle */
+.sa__tick {
+  flex-shrink:     0;
+  width:           26px;
+  height:          26px;
+  border-radius:   50%;
+  background:      var(--tick-bg);
+  border:          1.5px solid rgba(245, 197, 24, 0.40);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  color:           var(--accent);
+  transition:      background 0.2s, border-color 0.2s;
+}
+
+.sa__tick svg {
+  width:  13px;
+  height: 13px;
+}
+
+.sa__list-item:hover .sa__tick {
+  background:   rgba(245, 197, 24, 0.22);
+  border-color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5.  CTA BUTTON — dark solid
+═══════════════════════════════════════════════════════════ */
+.sa__cta {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             10px;
+  align-self:      flex-start; /* don't stretch full width */
+  margin-top:      8px;
+  padding:         13px 26px;
+  background:      var(--text-dark);
+  color:           #ffffff;
+  font-family:     var(--sa-font);
+  font-size:       0.83rem;
+  font-weight:     700;
+  letter-spacing:  0.04em;
+  text-decoration: none;
+  border-radius:   3px;
+  border:          2px solid var(--text-dark);
+  transition:      background 0.2s, color 0.2s,
+                   border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.sa__cta-arrow {
+  width:      16px;
+  height:     16px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.sa__cta:hover {
+  background:   var(--accent);
+  color:        #0d0d0d;
+  border-color: var(--accent);
+  transform:    translateY(-2px);
+  box-shadow:   0 6px 20px rgba(245, 197, 24, 0.30);
+}
+
+.sa__cta:hover .sa__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6.  RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+
+/* Tablet — stack vertically, image on top */
+@media (max-width: 900px) {
+  .sa {
+    flex-direction: column;
+  }
+
+  .sa__image-col {
+    flex:       none;
+    max-width:  100%;
+    width:      100%;
+    min-height: 340px;
+    position:   relative;
+  }
+
+  /* Re-position stat card when stacked */
+  .sa__stat-card {
+    right:         24px;
+    bottom:        24px;
+    border-radius: 6px;  /* fully rounded when not at edge */
+  }
+
+  .sa__text {
+    padding: 56px 40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .sa__image-col { min-height: 260px; }
+
+  .sa__text {
+    padding: 40px 24px;
+    gap:     16px;
+  }
+
+  .sa__headline {
+    font-size: clamp(1.5rem, 6vw, 1.9rem);
+  }
+
+  .sa__stat-card {
+    min-width:  unset;
+    right:      16px;
+    bottom:     16px;
+    padding:    14px 18px;
+    gap:        10px;
+  }
+
+  .sa__stat-number { font-size: 1.6rem; }
+
+  .sa__cta {
+    width:           100%;
+    justify-content: center;
+  }
+}
