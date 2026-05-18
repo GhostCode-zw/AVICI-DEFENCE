@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./SmartAccess.css";
+import "./Smartaccess.css";
 
 // ── Swap for your actual image ──────────────────────────────
 import accessImg from "../assets/smart-access.jpg"; // hand on keycard reader
