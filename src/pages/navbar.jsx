@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
-import logo from "../assets/AVICI logo.png";
+import logo from "../assets/AVICI LOGO.png";
 
 // ── Reusable nav link with active underline ──────────────────
 const NavItem = ({ to, label, hasDropdown = false }) => {
